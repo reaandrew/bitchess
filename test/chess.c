@@ -86,4 +86,5 @@ int main(){
     printboard(&result);
     result = black_pawns | 0x55AA55AA55AA55AA;
     printboard(&result);
+    return 0;
 }
