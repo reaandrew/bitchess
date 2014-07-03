@@ -43,7 +43,6 @@ void printboard(board *b){
     for(i = 63; i >= 0; i-=8){
         for(j = 7; j >= 0; j--){
             putchar(squares[i-j]);
-            //printf("%d",i-j);
             putchar(' ');
         }
         printf("\n");
@@ -69,13 +68,6 @@ void initialize_whitepawns(board *b){
 
 int main(){
     board black_pawns = 0;
-    /*
-       board white_pawns = 0;
-       initialize_pawns(&black_pawns);
-       initialize_whitepawns(&white_pawns);
-       board result = black_pawns | white_pawns;
-       result = move(&result, "a2","a3");
-       */
     board result = black_pawns | 0x0101010101010101;
     printboard(&result);
     result = black_pawns | 0x00000000000000FF;
