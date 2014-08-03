@@ -1,7 +1,23 @@
 #include <stdio.h>
 
-const char* W_PIECES = "♔♕♖♗♘♙";
-const char* B_PIECES = "♚♛♜♝♞♟";
+const char* W_PIECES = "♔♕♖♗♘♙■";
+const char* B_PIECES = "♚♛♜♝♞♟□";
+
+/*
+   navigation
+
+    northwest    north   northeast
+    noWe         nort         noEa
+            +7    +8    +9
+                \  |  /
+    west    -1 <-  0 -> +1    east
+                /  |  \
+           -9    -8    -7
+    soWe         sout         soEa
+    southwest    south   southeast
+
+*/
+
 
 typedef unsigned long int board;
 
@@ -88,7 +104,7 @@ int main(){
     printboard(&result);
     printf("Showing a Knight and the moves it can make\n");
     int move = 27;
-    result = black_pawns | (0x1LL << move) 
+    board knightMoves = black_pawns | (0x1LL << move) 
         | (0x1LL << (move + 17))
         | (0x1LL << (move + 10))
         | (0x1LL << (move + 15))
@@ -97,18 +113,48 @@ int main(){
         | (0x1LL << (move - 17))
         | (0x1LL << (move - 15))
         | (0x1LL << (move - 6));
-    printboard(&result);
+    printboard(&knightMoves);
     printf("Showing a Bishop and the moves it can make\n");
 
-    result = black_pawns | (0x1LL << move) 
+    board bishopMoves = black_pawns | (0x1LL << move) 
         | (0x1LL << (move + 9 + 9 + 9 + 9))
         | (0x1LL << (move + 9 + 9 + 9))
         | (0x1LL << (move + 9 + 9))
         | (0x1LL << (move + 9))
+        | (0x1LL << (move + 7 + 7 + 7))
+        | (0x1LL << (move + 7 + 7))
+        | (0x1LL << (move + 7))
         | (0x1LL << (move - 9 ))
         | (0x1LL << (move - 9 - 9 ))
-        | (0x1LL << (move - 9 - 9 - 9));
-    printboard(&result);
+        | (0x1LL << (move - 9 - 9 - 9))
+        | (0x1LL << (move - 7 ))
+        | (0x1LL << (move - 7 - 7 ))
+        | (0x1LL << (move - 7 - 7 - 7 ));
+    printboard(&bishopMoves);
+
+    printf("Showing a Rook and the moves it can make\n");
+
+    printf("\n");
+    board rookMoves = black_pawns | (0x1LL << move) 
+        | (0x1LL << (move + 8))
+        | (0x1LL << (move + 8 + 8))
+        | (0x1LL << (move + 8 + 8 + 8))
+        | (0x1LL << (move + 8 + 8 + 8 + 8))
+        | (0x1LL << (move - 8))
+        | (0x1LL << (move - 8 - 8))
+        | (0x1LL << (move - 8 - 8 - 8))
+        | (0x1LL << (move + 1))
+        | (0x1LL << (move + 1 + 1))
+        | (0x1LL << (move + 1 + 1 + 1))
+        | (0x1LL << (move + 1 + 1 + 1 + 1))
+        | (0x1LL << (move - 1))
+        | (0x1LL << (move - 1 - 1))
+        | (0x1LL << (move - 1 - 1 - 1));
+    printboard(&rookMoves);
+
+    printf("Showing a Queen and the moves it can make\n");
+    board queenMoves = bishopMoves | rookMoves;
+    printboard(&queenMoves);
     return 0;
 }
 
