@@ -102,7 +102,6 @@ int main(){
 
     result = black_pawns | (0x1LL << move) 
         | (0x1LL << (move + 9 + 9 + 9 + 9))
-        | (0x1LL << (move + 9 + 9 + 9 + 9))
         | (0x1LL << (move + 9 + 9 + 9))
         | (0x1LL << (move + 9 + 9))
         | (0x1LL << (move + 9))
