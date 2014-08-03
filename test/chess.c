@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+const char* W_PIECES = "♔♕♖♗♘♙";
+const char* B_PIECES = "♚♛♜♝♞♟";
+
 typedef unsigned long int board;
 
 board createPositionMask(char position[2]){
@@ -68,15 +71,44 @@ void initialize_whitepawns(board *b){
 
 int main(){
     board black_pawns = 0;
+    printf("Number = %lu\n",0x0101010101010101);
     board result = black_pawns | 0x0101010101010101;
     printboard(&result);
+    printf("Number = %lu\n",0x00000000000000FF);
     result = black_pawns | 0x00000000000000FF;
     printboard(&result);
+    printf("Number = %lu\n",0xFF00000000000000);
     result = black_pawns | 0xFF00000000000000;
     printboard(&result);
+    printf("Number = %lu\n",0x8040201008040201);
     result = black_pawns | 0x8040201008040201;
     printboard(&result);
+    printf("Number = %lu\n",0x55AA55AA55AA55AA);
     result = black_pawns | 0x55AA55AA55AA55AA;
+    printboard(&result);
+    printf("Showing a Knight and the moves it can make\n");
+    int move = 27;
+    result = black_pawns | (0x1LL << move) 
+        | (0x1LL << (move + 17))
+        | (0x1LL << (move + 10))
+        | (0x1LL << (move + 15))
+        | (0x1LL << (move + 6))
+        | (0x1LL << (move - 10))
+        | (0x1LL << (move - 17))
+        | (0x1LL << (move - 15))
+        | (0x1LL << (move - 6));
+    printboard(&result);
+    printf("Showing a Bishop and the moves it can make\n");
+
+    result = black_pawns | (0x1LL << move) 
+        | (0x1LL << (move + 9 + 9 + 9 + 9))
+        | (0x1LL << (move + 9 + 9 + 9 + 9))
+        | (0x1LL << (move + 9 + 9 + 9))
+        | (0x1LL << (move + 9 + 9))
+        | (0x1LL << (move + 9))
+        | (0x1LL << (move - 9 ))
+        | (0x1LL << (move - 9 - 9 ))
+        | (0x1LL << (move - 9 - 9 - 9));
     printboard(&result);
     return 0;
 }
