@@ -102,7 +102,6 @@ int main(){
     printf("Number = %lu\n",0x55AA55AA55AA55AA);
     result = black_pawns | 0x55AA55AA55AA55AA;
     printboard(&result);
-    printf("Showing a Knight and the moves it can make\n");
     int move = 27;
     board knightMoves = black_pawns | (0x1LL << move) 
         | (0x1LL << (move + 17))
@@ -113,8 +112,8 @@ int main(){
         | (0x1LL << (move - 17))
         | (0x1LL << (move - 15))
         | (0x1LL << (move - 6));
+    printf("Showing a Knight and the moves it can make: %lu\n", knightMoves);
     printboard(&knightMoves);
-    printf("Showing a Bishop and the moves it can make\n");
 
     board bishopMoves = black_pawns | (0x1LL << move) 
         | (0x1LL << (move + 9 + 9 + 9 + 9))
@@ -130,9 +129,9 @@ int main(){
         | (0x1LL << (move - 7 ))
         | (0x1LL << (move - 7 - 7 ))
         | (0x1LL << (move - 7 - 7 - 7 ));
+    printf("Showing a Bishop and the moves it can make: %lu\n", bishopMoves);
     printboard(&bishopMoves);
 
-    printf("Showing a Rook and the moves it can make\n");
 
     printf("\n");
     board rookMoves = black_pawns | (0x1LL << move) 
@@ -150,11 +149,24 @@ int main(){
         | (0x1LL << (move - 1))
         | (0x1LL << (move - 1 - 1))
         | (0x1LL << (move - 1 - 1 - 1));
+    printf("Showing a Rook and the moves it can make: %lu\n", rookMoves);
     printboard(&rookMoves);
 
-    printf("Showing a Queen and the moves it can make\n");
     board queenMoves = bishopMoves | rookMoves;
+    printf("Showing a Queen and the moves it can make: %lu\n", queenMoves);
     printboard(&queenMoves);
+
+    board kingMoves = black_pawns | (0x1LL << move)
+        | (0x1LL << (move + 8))
+        | (0x1LL << (move - 8))
+        | (0x1LL << (move + 7))
+        | (0x1LL << (move - 7))
+        | (0x1LL << (move + 9))
+        | (0x1LL << (move - 9))
+        | (0x1LL << (move + 1))
+        | (0x1LL << (move - 1));
+    printf("Showing a King and the moves it can make: %lu\n", kingMoves);
+    printboard(&kingMoves);
     return 0;
 }
 
